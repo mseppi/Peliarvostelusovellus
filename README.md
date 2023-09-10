@@ -1,2 +1,2 @@
 # Peliarvostelusovellus
-Sovellus pelien arvostelemiseen
+Sovellus pelien arvostelemiseen. Sovelluksen ideana on, että käyttäjä voi kirjautua sivulle, jossa on pelejä, joita voi arvostella. Käyttäjä voi itse lisätä sivustolle pelejä, mitä sieltä ei vielä löydy. Muiden arvosteluista voi äänestää, onko samaa vai eri mieltä ja niitä voi myös kommentoida. Sovellus tulee sisältämään useita tietokantoja mm. Peleille, Käyttäjille, pelien kuville, arvosteluille, kommenteille ja käyttäjän profiilille. 
