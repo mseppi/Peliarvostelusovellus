@@ -9,5 +9,5 @@ CREATE TABLE profile (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES user(id),
     name TEXT REFERENCES user(name),
-    bio TEXT,
+    bio TEXT default 'placeholder',
 );
