@@ -11,3 +11,5 @@ CREATE TABLE profile (
     name TEXT REFERENCES user(name),
     bio TEXT default 'placeholder',
 );
+
+INSERT INTO user (name, password, role) VALUES ('admin', 'admin', 'admin');
