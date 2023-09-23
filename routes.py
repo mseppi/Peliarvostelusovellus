@@ -16,4 +16,19 @@ def login():
         return render_template("index.html")
     else:
         return render_template("error.html", message="Väärä salasana tai käyttäjätunnus")
+    
+@app.route("/logout")
+def logout():
+    del session["username"]
+    return redirect("/")
+
+@app.route("/register")
+def register():
+    return render_template("register.html")
+    username = request.form["username"]
+    password = request.form["password"]
+    if register(username, password):
+        return render_template("index.html")
+    else:
+        return render_template("error.html", message="Rekisteröinti epäonnistui")
 

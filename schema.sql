@@ -1,15 +1,20 @@
-CREATE TABLE user (
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS profile CASCADE;
+
+
+
+CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    name TEXT,
-    password TEXT,
-    role TEXT DEFAULT 'user'
+    username TEXT UNIQUE,
+    pword TEXT,
+    system_role TEXT
 );
 
 CREATE TABLE profile (
     id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES user(id),
-    name TEXT REFERENCES user(name),
-    bio TEXT default 'placeholder',
+    user_id INTEGER REFERENCES users(id),
+    username TEXT REFERENCES users(username),
+    bio TEXT default 'placeholder'
 );
 
-INSERT INTO user (name, password, role) VALUES ('admin', 'admin', 'admin');
+INSERT INTO users (username, pword, system_role) VALUES ('admin', 'admin', 'admin');
