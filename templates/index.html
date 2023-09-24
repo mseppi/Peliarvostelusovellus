@@ -4,12 +4,23 @@
     <title>Peliarvostelusovellus</title>
     </head>
         <body>
+            {% if session.user_id%}
+                <p>Olet kirjautunut sisään käyttäjänimellä {{ session.username }}</p>
+                <a href="/logout">Kirjaudu ulos</a>
+                <a href="/profile">Profiili</a>
+            {% else %}
             <p>Kirjaudu sisään</p>
             <form action="/login" method="post">
                 <input type="text" name="username" placeholder="Käyttäjätunnus">
                 <input type="password" name="password" placeholder="Salasana">
                 <input type="submit" value="Kirjaudu sisään">
+            <p>Rekisteröidy</p>
+            <form action="/register" method="post">
+                <input type="text" name="username" placeholder="Käyttäjätunnus">
+                <input type="password" name="password" placeholder="Salasana">
+                <input type="submit" value="Rekisteröidy">
             </form>
+            {% endif %}
         </body>
 </html>
 

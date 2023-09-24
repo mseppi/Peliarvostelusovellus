@@ -7,28 +7,31 @@ from visits import login
 def index():
     return render_template("index.html")
 
-@app.route("/login", methods=["post"])
-def login():
-    name = request.form["name"]
-    password = request.form["password"]
-    role = request.form["role"]
-    if login(name, password, role):
-        return render_template("index.html")
-    else:
-        return render_template("error.html", message="Väärä salasana tai käyttäjätunnus")
+@app.route("/login", methods=["GET", "POST"])
+def login_route():
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+        if login(username, password):
+            session["username"] = username
+            session["csrf_token"] = urandom(16).hex()
+            return redirect("/")
+        else:
+            return render_template("error.html", message="Väärä tunnus tai salasana")
+    return render_template("login.html")
+
     
 @app.route("/logout")
 def logout():
     del session["username"]
     return redirect("/")
 
-@app.route("/register")
+@app.route("/register", methods=[])
 def register():
-    return render_template("register.html")
     username = request.form["username"]
     password = request.form["password"]
-    if register(username, password):
-        return render_template("index.html")
+    role = request.form["role"]
+    if register(username, password, role):
+        return "Rekisteröinti onnistui"
     else:
         return render_template("error.html", message="Rekisteröinti epäonnistui")
-
