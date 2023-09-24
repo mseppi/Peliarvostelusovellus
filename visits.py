@@ -2,17 +2,31 @@ from db import db
 from flask import session
 from os import urandom
 from werkzeug.security import check_password_hash, generate_password_hash
+from sqlalchemy import text
 
 
-def login(name, password):
-    sql = "SELECT password FROM users WHERE name=:name"
-    result = db.session.execute(sql, {"name":name})
+def login(username, password):
+    sql = text("SELECT pword, id FROM users WHERE username=:username")
+    result = db.session.execute(sql, {"username":username})
     user = result.fetchone()
     if check_password_hash(user[0], password):
         if not user:
             return False
         session["user_id"] = user[0]
         return True
-    else:
-        return False
+    return False
+
+def register(username, password):
+    hash_value = generate_password_hash(password)
+    try:
+        sql = text("INSERT INTO users (username, pword) VALUES (:username, :pword)")
+        db.session.execute(sql, {"username":username, "pword":hash_value})
+        db.session.commit()
+        return True
+    except:
+       return False
+
+def logout():
+    del session["user_id"]
+
 

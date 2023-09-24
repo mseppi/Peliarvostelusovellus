@@ -1,7 +1,7 @@
 from app import app
-from flask import render_template, request, session
+from flask import render_template, request, session, redirect
 from os import urandom
-from visits import login
+from visits import login, register, logout
 
 @app.route("/")
 def index():
@@ -9,6 +9,8 @@ def index():
 
 @app.route("/login", methods=["GET", "POST"])
 def login_route():
+    if request.method == "GET":
+        return render_template("login.html")
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
@@ -18,20 +20,24 @@ def login_route():
             return redirect("/")
         else:
             return render_template("error.html", message="Väärä tunnus tai salasana")
-    return render_template("login.html")
 
     
 @app.route("/logout")
-def logout():
-    del session["username"]
+def logout_route():
+    logout()
     return redirect("/")
 
-@app.route("/register", methods=[])
-def register():
-    username = request.form["username"]
-    password = request.form["password"]
-    role = request.form["role"]
-    if register(username, password, role):
-        return "Rekisteröinti onnistui"
-    else:
-        return render_template("error.html", message="Rekisteröinti epäonnistui")
+@app.route("/register", methods=["GET", "POST"])
+def register_route():
+    if request.method == "GET":
+        return render_template("register.html")
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+        password2 = request.form["password2"]
+        if password != password2:
+            return render_template("error.html", message="Salasanat eivät täsmää")
+        if register(username, password):
+            return redirect("/")
+        else:
+            return render_template("error.html", message="Rekisteröinti ei onnistunut")
