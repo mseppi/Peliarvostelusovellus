@@ -9,7 +9,7 @@ CREATE TABLE users (
 
 CREATE TABLE profile (
     id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES users(id),
-    username TEXT REFERENCES users(username),
-    bio TEXT default 'placeholder'
+    username TEXT UNIQUE,
+    bio TEXT default 'placeholder',
+    fav_games TEXT default 'placeholder'
 );

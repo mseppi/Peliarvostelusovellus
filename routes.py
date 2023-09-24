@@ -1,7 +1,7 @@
 from app import app
 from flask import render_template, request, session, redirect
 from os import urandom
-from visits import login, register, logout
+from visits import login, register, logout, profile
 
 @app.route("/")
 def index():
@@ -41,3 +41,16 @@ def register_route():
             return redirect("/")
         else:
             return render_template("error.html", message="Rekisteröinti ei onnistunut")
+
+@app.route("/profile")
+def profile_route():
+    if "username" not in session:
+        return render_template("error.html", message="Kirjaudu ensin sisään")
+    
+    username = session["username"]
+    if profile(username):
+        return render_template("profile.html", bio=session.get("bio"), fav_games=session.get("fav_games"))
+    else:
+        return render_template("error.html", message="Profiilin lataaminen ei onnistunut")
+        
+        
