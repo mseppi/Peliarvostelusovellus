@@ -14,7 +14,7 @@ Sovellukseen voi kirjautua ja rekisteröityä. Sovelluksen sisällä voi tarkast
 
 ## Käynnistysohje paikallisesti
 
-- Asenna PostgreSQL sovelluksen ohjeiden mukaisesti
+- Asenna PostgreSQL kurssin ohjeiden mukaisesti
 - Käynnistä tietokanta komennolla ```start-pg.sh```
 - Lataa repositori
 - Luo sovelluksen juurihakemistoon .env tiedosto ja laita sinne
