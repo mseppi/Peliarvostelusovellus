@@ -1,2 +1,34 @@
 # Peliarvostelusovellus
-Sovellus pelien arvostelemiseen. Sovelluksen ideana on, että käyttäjä voi kirjautua sivulle, jossa on pelejä, joita voi arvostella. Käyttäjä voi itse lisätä sivustolle pelejä, mitä sieltä ei vielä löydy. Muiden arvosteluista voi äänestää, onko samaa vai eri mieltä ja niitä voi myös kommentoida. Sovellus tulee sisältämään useita tietokantoja mm. Peleille, Käyttäjille, pelien kuville, arvosteluille, kommenteille ja käyttäjän profiilille. 
+Sovellus pelien arvostelemiseen. Sovelluksen ideana on, että käyttäjä voi kirjautua sivulle, jossa on pelejä, joita voi arvostella.
+
+### Ominaisuuksiin kuuluu
+- Sisäänkirjautuminen ja rekisteröityminen
+- Arvostelujen lisääminen
+- Arvostelujen kommentoiminen
+- Arvosteluista tykkääminen tai epätykkääminen
+- Profiilin tarkisteleminen ja muokkaaminen
+- Ylläpitäjä voi poistaa postauksia ja käyttäjiä sekä lisätä pelejä
+
+## Tämänhetkinen tilanne
+Sovellukseen voi kirjautua ja rekisteröityä. Sovelluksen sisällä voi tarkastella omaa profiiliaan.
+
+## Käynnistysohje paikallisesti
+
+- Asenna PostgreSQL sovelluksen ohjeiden mukaisesti
+- Käynnistä tietokanta komennolla ```start-pg.sh```
+- Lataa repositori
+- Luo sovelluksen juurihakemistoon .env tiedosto ja laita sinne
+```
+DATABASE_URL=postgresql+psycopg2:///tietokannan-osoite
+SECRET_KEY=salainen-avain
+```
+- Aktivoi virtuaaliympäristö komennoilla
+
+``` python3 -m venv venv ```
+
+``` source venv/bin/activate ```
+
+- Asenna riippuvuuudet virtuaaliympäristössä komennolla ```pip install -r requirements.txt```
+- Määritä sovelluksen tietokanta komennolla ```psql<schema.sql```
+- Käynnistä sovellus komennolla ```flask run```
+- Tee sovellukselle käyttäjä ja kirjaudu sisään
