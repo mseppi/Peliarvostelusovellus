@@ -17,7 +17,7 @@ Sovellukseen voi kirjautua ja rekisteröityä. Sovelluksen sisällä voi tarkast
 - Asenna PostgreSQL kurssin ohjeiden mukaisesti
 - Käynnistä tietokanta komennolla ```start-pg.sh```
 - Lataa repositori
-- Luo sovelluksen juurihakemistoon .env tiedosto ja laita sinne
+- Luo sovelluksen juurihakemistoon .env tiedosto ja syötä sinne
 ```
 DATABASE_URL=postgresql+psycopg2:///tietokannan-osoite
 SECRET_KEY=salainen-avain
