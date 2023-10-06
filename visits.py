@@ -46,6 +46,15 @@ def profile(username):
             return False
     except:
         return False
+
+def update_profile(username, bio, fav_games):
+    try:
+        sql = text("UPDATE profile SET bio=:bio, fav_games=:fav_games WHERE username=:username")
+        db.session.execute(sql, {"bio":bio, "fav_games":fav_games, "username":username})
+        db.session.commit()
+        return True
+    except:
+        return False
     
 
     

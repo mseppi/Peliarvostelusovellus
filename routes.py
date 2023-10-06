@@ -1,7 +1,7 @@
 from app import app
 from flask import render_template, request, session, redirect
 from os import urandom
-from visits import login, register, logout, profile
+from visits import login, register, logout, profile, update_profile
 
 @app.route("/")
 def index():
@@ -54,3 +54,15 @@ def profile_route():
         return render_template("error.html", message="Profiilin lataaminen ei onnistunut")
         
         
+@app.route("/update_profile", methods=["GET", "POST"])
+def update_profile_route():
+    if request.method == "GET":
+        return render_template("update_profile.html")
+    if request.method == "POST":
+        username = session["username"]
+        bio = request.form["bio"]
+        fav_games = request.form["fav_games"]
+        if update_profile(username, bio, fav_games):
+            return redirect("/profile")
+        else:
+            return render_template("error.html", message="Profiilin päivittäminen ei onnistunut")
