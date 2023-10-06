@@ -1,10 +1,14 @@
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS profile CASCADE;
+DROP TABLE IF EXISTS games CASCADE;
+DROP TABLE IF EXISTS reviews CASCADE;
+DROP TABLE IF EXISTS comments CASCADE;
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username TEXT UNIQUE,
-    pword TEXT
+    pword TEXT,
+    admin_rights BOOLEAN default FALSE
 );
 
 CREATE TABLE profile (
@@ -13,3 +17,31 @@ CREATE TABLE profile (
     bio TEXT default 'placeholder',
     fav_games TEXT default 'placeholder'
 );
+
+CREATE TABLE games (
+    id SERIAL PRIMARY KEY,
+    title TEXT UNIQUE,
+    genre TEXT,
+    information TEXT
+);
+
+CREATE TABLE reviews (
+    id SERIAL PRIMARY KEY,
+    username TEXT,
+    game_id INTEGER,
+    review TEXT,
+    rating INTEGER,
+    likes INTEGER default 0,
+    time TIMESTAMP default CURRENT_TIMESTAMP
+);
+
+CREATE TABLE comments (
+    id SERIAL PRIMARY KEY,
+    username TEXT,
+    review_id INTEGER,
+    comment TEXT,
+    likes INTEGER default 0,
+    time TIMESTAMP default CURRENT_TIMESTAMP
+);
+
+INSERT INTO users (username, pword, admin_rights) VALUES ('admin', 'pbkdf2:sha256:600000$gxFzxmYkY6rCUedn$88417f36ff1bdac3d4b7e42905b4a54ba1af12c77249cf97b1375aae165f5a99', TRUE);
