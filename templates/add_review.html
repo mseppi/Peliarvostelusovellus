@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lisää arvostelu - Peliarvostelusovellus</title>
+</head>
+<body>
+    <h1>Lisää arvostelu</h1>
+    <form action="/game/{{ id }}/add_review" method="post">
+        <input type="text" name="title" placeholder="Otsikko">
+        <input type="text" name="review" placeholder="Sisältö">
+        <input type="number" name="rating" placeholder="Arvosana">
+        <input type="submit" value="Lisää arvostelu">
+    </form>
+    <a href="/">Palaa etusivulle</a>
+</html>

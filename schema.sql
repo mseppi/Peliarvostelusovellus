@@ -22,17 +22,18 @@ CREATE TABLE games (
     id SERIAL PRIMARY KEY,
     title TEXT UNIQUE,
     release_year INTEGER,
-    genre TEXT,
+    genre TEXT
 );
 
 CREATE TABLE reviews (
     id SERIAL PRIMARY KEY,
+    title TEXT,
     username TEXT,
     game_id INTEGER,
     review TEXT,
     rating INTEGER,
     likes INTEGER default 0,
-    time TIMESTAMP default CURRENT_TIMESTAMP
+    date_created TIMESTAMP default CURRENT_TIMESTAMP
 );
 
 CREATE TABLE comments (

@@ -7,5 +7,21 @@
     <h1>{{ game['title'] }}</h1>
     <p>Genre: {{ game['genre'] }}</p>
     <p>Julkaisuvuosi: {{ game['release_year'] }}</p>
+    <a href="/game/{{ game['id'] }}/add_review">Lisää arvostelu</a>
+    {% if reviews|length > 0 %}
+    <h2>Arvostelut</h2>
+    <ul>
+        {% for review in reviews %}
+        <li>
+            <p>{{ review['username'] }}</p>
+            <p>{{ review['title'] }}</p>
+            <p>{{ review['review'] }}</p>
+            <p>{{ review['rating'] }} *</p>
+            <p>{{ review['date_created'].strftime('%Y-%m-%d %H:%M:%S') }}</p>
+            <p>{{ review['likes'] }}</p>
+        </li>
+        {% endfor %}
     <a href="/">Palaa etusivulle</a>
+    {% endif %}
+</body>
 </html>

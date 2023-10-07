@@ -80,4 +80,21 @@ def get_game(id):
         return result.fetchone()
     except:
         return False    
-
+    
+def add_review(title, username, game_id, review, rating):
+    try:
+        sql = text("INSERT INTO reviews (title, username, game_id, review, rating) VALUES (:title, :username, :game_id, :review, :rating)")
+        print(sql)
+        db.session.execute(sql, {"title":title, "username":username, "game_id":game_id, "review":review, "rating":rating})
+        db.session.commit()
+        return True
+    except:
+        return False
+    
+def get_reviews(game_id):
+    try:
+        sql = text("SELECT * FROM reviews WHERE game_id=:game_id")
+        result = db.session.execute(sql, {"game_id":game_id})
+        return result.fetchall()
+    except:
+        return False

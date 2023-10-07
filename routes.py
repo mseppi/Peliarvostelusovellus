@@ -1,7 +1,7 @@
 from app import app
 from flask import render_template, request, session, redirect
 from os import urandom
-from visits import login, register, logout, profile, update_profile, add_game, get_games, get_game
+from visits import login, register, logout, profile, update_profile, add_game, get_games, get_game, add_review, get_reviews
 
 @app.route("/")
 def index():
@@ -88,9 +88,20 @@ def games_route():
 @app.route("/game/<int:id>")
 def game_route(id):
     if get_game(id):
-        return render_template("game.html", game=get_game(id))
+        return render_template("game.html", game=get_game(id), reviews=get_reviews(id))
     else:
         return render_template("error.html", message="Peliä ei löydy")
-
-
-
+    
+@app.route("/game/<int:id>/add_review", methods=["GET", "POST"])
+def add_review_route(id):
+    if request.method == "GET":
+        return render_template("add_review.html", id=id)
+    if request.method == "POST":
+        username = session["username"]
+        review = request.form["review"]
+        title = request.form["title"]
+        rating = request.form["rating"]
+        if add_review(title, username, id, review, rating):
+            return redirect("/game/" + str(id))
+        else:
+            return render_template("error.html", message="Arvostelun lisääminen ei onnistunut")
