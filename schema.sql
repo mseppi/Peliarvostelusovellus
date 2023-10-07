@@ -21,8 +21,8 @@ CREATE TABLE profile (
 CREATE TABLE games (
     id SERIAL PRIMARY KEY,
     title TEXT UNIQUE,
+    release_year INTEGER,
     genre TEXT,
-    information TEXT
 );
 
 CREATE TABLE reviews (

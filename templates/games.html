@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pelit - Peliarvostelusovellus</title>
+</head>
+<body>
+    <h1>Pelit</h1>
+    <ul>
+        {% for game in games %}
+        <li><a href="/game/{{ game.id }}">{{ game.title }}</a></li>
+        {% endfor %}
+</html>

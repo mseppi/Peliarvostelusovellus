@@ -8,6 +8,8 @@
                 <p>Olet kirjautunut sisään käyttäjänimellä {{ session.username }}</p>
                 <a href="/logout">Kirjaudu ulos</a>
                 <a href="/profile">Profiili</a>
+                <a href="/games">Pelit</a>
+                <a href="/add_game">Lisää peli</a>
             {% else %}
             <p>Kirjaudu sisään</p>
             <form action="/login" method="post">
