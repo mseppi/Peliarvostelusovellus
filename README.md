@@ -10,7 +10,16 @@ Sovellus pelien arvostelemiseen. Sovelluksen ideana on, että käyttäjä voi ki
 - Ylläpitäjä voi poistaa postauksia ja käyttäjiä
 
 ## Tämänhetkinen tilanne
-Sovellukseen voi kirjautua ja rekisteröityä. Sovelluksen sisällä voi tarkastella omaa profiiliaan.
+Sovellukseen voi kirjautua ja rekisteröityä. Sovelluksen sisällä voi tarkastella omaa profiiliaan. Sovelluksessa voi lisätä pelejä, joihin taas voi lisätä arvosteluja. Arvosteluja voi kommentoida.
+
+## Puuttuvat ominaisuudet mitkä tehdään ennen loppupalautusta
+- Admin-ominaisuudet
+- CSS
+- Muiden profiilien tarkastelu
+- Salasanalle tiukemmat vaatimukset
+- Error-viestien parantaminen
+- Tykkääminen
+- CSRF-haavoittuvuuden poistaminen
 
 ## Käynnistysohje paikallisesti
 
