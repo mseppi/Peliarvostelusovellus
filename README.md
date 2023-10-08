@@ -7,7 +7,7 @@ Sovellus pelien arvostelemiseen. Sovelluksen ideana on, että käyttäjä voi ki
 - Arvostelujen kommentoiminen
 - Arvosteluista tykkääminen
 - Profiilin tarkisteleminen ja muokkaaminen
-- Ylläpitäjä voi poistaa postauksia ja käyttäjiä sekä lisätä pelejä
+- Ylläpitäjä voi poistaa postauksia ja käyttäjiä
 
 ## Tämänhetkinen tilanne
 Sovellukseen voi kirjautua ja rekisteröityä. Sovelluksen sisällä voi tarkastella omaa profiiliaan.
