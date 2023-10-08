@@ -98,3 +98,20 @@ def get_reviews(game_id):
         return result.fetchall()
     except:
         return False
+    
+def add_comment(username, review_id, comment):
+    try:
+        sql = text("INSERT INTO comments (username, review_id, comment) VALUES (:username, :review_id, :comment)")
+        db.session.execute(sql, {"username":username, "review_id":review_id, "comment":comment})
+        db.session.commit()
+        return True
+    except:
+        return False
+
+def get_comments(review_id):
+    try:
+        sql = text("SELECT * FROM comments WHERE review_id=:review_id")
+        result = db.session.execute(sql, {"review_id":review_id})
+        return result.fetchall()
+    except:
+        return False

@@ -1,7 +1,7 @@
 from app import app
 from flask import render_template, request, session, redirect
 from os import urandom
-from visits import login, register, logout, profile, update_profile, add_game, get_games, get_game, add_review, get_reviews
+from visits import login, register, logout, profile, update_profile, add_game, get_games, get_game, add_review, get_reviews, get_comments, add_comment
 
 @app.route("/")
 def index():
@@ -88,7 +88,7 @@ def games_route():
 @app.route("/game/<int:id>")
 def game_route(id):
     if get_game(id):
-        return render_template("game.html", game=get_game(id), reviews=get_reviews(id))
+        return render_template("game.html", game=get_game(id), reviews=get_reviews(id), len=len(get_comments(id)))
     else:
         return render_template("error.html", message="Peliä ei löydy")
     
@@ -105,3 +105,20 @@ def add_review_route(id):
             return redirect("/game/" + str(id))
         else:
             return render_template("error.html", message="Arvostelun lisääminen ei onnistunut")
+        
+@app.route("/game/<int:id>/comments", methods=["GET", "POST"])
+def comments_route(id):
+    if request.method == "GET":
+        if get_comments(id):
+            return render_template("comments.html", comments=get_comments(id), id=id)
+        elif get_comments(id) == []:
+            return render_template("comments.html", comments=[], id=id)
+        else:
+            return render_template("error.html", message="Kommenttien lataaminen ei onnistunut")
+    if request.method == "POST":
+        username = session["username"]
+        comment = request.form["comment"]
+        if add_comment(username, id, comment):
+            return redirect("/game/" + str(id) + "/comments")
+        else:
+            return render_template("error.html", message="Kommentin lisääminen ei onnistunut")

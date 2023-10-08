@@ -19,6 +19,7 @@
             <p>{{ review['rating'] }} *</p>
             <p>{{ review['date_created'].strftime('%Y-%m-%d %H:%M:%S') }}</p>
             <p>{{ review['likes'] }}</p>
+            <a href="/game/{{ review['id'] }}/comments">Kommentit {{len}}</a>
         </li>
         {% endfor %}
     <a href="/">Palaa etusivulle</a>
