@@ -20,6 +20,7 @@ Sovellukseen voi kirjautua ja rekisteröityä. Sovelluksen sisällä voi tarkast
 - Error-viestien parantaminen
 - Tykkääminen
 - CSRF-haavoittuvuuden poistaminen
+- Koodin rakenteen hiominen
 
 ## Käynnistysohje paikallisesti
 
