@@ -16,8 +16,6 @@ Sovellukseen voi kirjautua ja rekisteröityä. Sovelluksen sisällä voi tarkast
 - Admin-ominaisuudet
 - CSS
 - Muiden profiilien tarkastelu
-- Salasanalle tiukemmat vaatimukset
-- Error-viestien parantaminen
 - Tykkääminen
 - CSRF-haavoittuvuuden poistaminen
 - Koodin rakenteen hiominen
