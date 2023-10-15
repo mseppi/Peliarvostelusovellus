@@ -37,25 +37,26 @@ def register_route():
         password2 = request.form["password2"]
         if password != password2:
             return render_template("error.html", message="Salasanat eivät täsmää")
-        if register(username, password):
+        elif len(username) < 3 or len(password) < 3:
+            return render_template("error.html", message="Käyttäjätunnuksen ja salasanan tulee olla vähintään 3 merkkiä pitkiä")
+        elif register(username, password):
             return redirect("/")
         else:
-            return render_template("error.html", message="Rekisteröinti ei onnistunut")
+            return render_template("error.html", message="Käyttäjätunnus on jo käytössä")
 
 @app.route("/profile")
 def profile_route():
-    if "username" not in session:
-        return render_template("error.html", message="Kirjaudu ensin sisään")
-    
     username = session["username"]
     if profile(username):
         return render_template("profile.html", bio=session.get("bio"), fav_games=session.get("fav_games"))
     else:
-        return render_template("error.html", message="Profiilin lataaminen ei onnistunut")
+        return render_template("error.html", message="Kirjaudu ensin sisään") 
         
         
 @app.route("/update_profile", methods=["GET", "POST"])
 def update_profile_route():
+    if "username" not in session:
+        return render_template("error.html", message="Kirjaudu ensin sisään")
     if request.method == "GET":
         return render_template("update_profile.html")
     if request.method == "POST":
@@ -69,24 +70,36 @@ def update_profile_route():
 
 @app.route("/add_game", methods=["GET", "POST"])
 def add_game_route():
+    if "username" not in session:
+        return render_template("error.html", message="Kirjaudu ensin sisään")
     if request.method == "GET":
         return render_template("add_game.html")
     if request.method == "POST":
         title = request.form["title"]
         genre = request.form["genre"]
         release_year = request.form["release_year"]
-        if add_game(title, genre, release_year):
+        if len(title) < 1 or len(genre) < 1:
+            return render_template("error.html", message="Pelin nimi ja genre eivät voi olla tyhjiä")
+        elif len(title) > 50 or len(genre) > 50:
+            return render_template("error.html", message="Pelin nimi ja genre eivät voi olla yli 50 merkkiä pitkiä")
+        elif release_year < 1950 or release_year > 2030:
+            return render_template("error.html", message="Pelin julkaisuvuosi ei ole kelvollinen")
+        elif add_game(title, genre, release_year):
             return redirect("/")
         else:
             return render_template("error.html", message="Pelin lisääminen ei onnistunut")
 
 @app.route("/games")
 def games_route():
+    if "username" not in session:
+        return render_template("error.html", message="Kirjaudu ensin sisään")
     games = get_games()
     return render_template("games.html", games=games)
 
 @app.route("/game/<int:id>")
 def game_route(id):
+    if "username" not in session:
+        return render_template("error.html", message="Kirjaudu ensin sisään")
     if get_game(id):
         return render_template("game.html", game=get_game(id), reviews=get_reviews(id), len=len(get_comments(id)))
     else:
@@ -94,6 +107,8 @@ def game_route(id):
     
 @app.route("/game/<int:id>/add_review", methods=["GET", "POST"])
 def add_review_route(id):
+    if "username" not in session:
+        return render_template("error.html", message="Kirjaudu ensin sisään")
     if request.method == "GET":
         return render_template("add_review.html", id=id)
     if request.method == "POST":
@@ -101,13 +116,19 @@ def add_review_route(id):
         review = request.form["review"]
         title = request.form["title"]
         rating = request.form["rating"]
-        if add_review(title, username, id, review, rating):
+        if rating < 1 or rating > 10:
+            return render_template("error.html", message="Arvostelun tulee olla 1-10 väliltä")
+        elif len(review) < 1 or len(title) < 1:
+            return render_template("error.html", message="Arvostelun otsikko ja sisältö eivät voi olla tyhjiä")
+        elif add_review(title, username, id, review, rating):
             return redirect("/game/" + str(id))
         else:
             return render_template("error.html", message="Arvostelun lisääminen ei onnistunut")
         
 @app.route("/game/<int:id>/comments", methods=["GET", "POST"])
 def comments_route(id):
+    if "username" not in session:
+        return render_template("error.html", message="Kirjaudu ensin sisään")
     if request.method == "GET":
         if get_comments(id):
             return render_template("comments.html", comments=get_comments(id), id=id)
