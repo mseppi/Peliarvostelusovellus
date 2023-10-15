@@ -14,8 +14,8 @@ CREATE TABLE users (
 CREATE TABLE profile (
     id SERIAL PRIMARY KEY,
     username TEXT UNIQUE,
-    bio TEXT default 'placeholder',
-    fav_games TEXT default 'placeholder'
+    bio TEXT default '',
+    fav_games TEXT default ''
 );
 
 CREATE TABLE games (

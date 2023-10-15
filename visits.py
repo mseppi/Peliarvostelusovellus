@@ -31,6 +31,8 @@ def register(username, password):
 
 def logout():
     del session["user_id"]
+    del session["username"]
+    del session["admin_rights"]
 
 def profile(username):
     try:
