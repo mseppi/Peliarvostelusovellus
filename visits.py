@@ -6,15 +6,17 @@ from sqlalchemy import text
 
 
 def login(username, password):
-    sql = text("SELECT pword, id FROM users WHERE username=:username")
+    sql = text("SELECT pword, id, admin_rights FROM users WHERE username=:username")
     result = db.session.execute(sql, {"username": username})
     user = result.fetchone()
     print("User:")
     if user is not None:
         if check_password_hash(user[0], password):
             session["user_id"] = user[1]
+            session["username"] = username
+            session["csrf_token"] = urandom(16).hex()
+            session["admin_rights"] = user[2]
             return True
-
     return False
 
 def register(username, password):

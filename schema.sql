@@ -46,3 +46,4 @@ CREATE TABLE comments (
 );
 
 INSERT INTO users (username, pword, admin_rights) VALUES ('admin', 'pbkdf2:sha256:600000$gxFzxmYkY6rCUedn$88417f36ff1bdac3d4b7e42905b4a54ba1af12c77249cf97b1375aae165f5a99', TRUE);
+INSERT INTO profile (username, bio, fav_games) VALUES ('admin', 'I am the admin', 'admin');

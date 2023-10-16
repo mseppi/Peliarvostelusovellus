@@ -15,8 +15,6 @@ def login_route():
         username = request.form["username"]
         password = request.form["password"]
         if login(username, password):
-            session["username"] = username
-            session["csrf_token"] = urandom(16).hex()
             return redirect("/")
         else:
             return render_template("error.html", message="Väärä tunnus tai salasana")
