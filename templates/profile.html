@@ -5,10 +5,12 @@
     </head>
         <body>
             <h1>Profiili</h1>
-            <p>{{ session.username }}</p>
+            <p>{{ username }}</p>
             <p>biografia: {{ bio }}</p>
             <p>suosikkipeli: {{ fav_games }}</p>
             <a href="/">Etusivulle</a>
+            {% if username == session["username"] %}
             <a href="/update_profile">Muuta profiilia</a>
+            {% endif %}
         </body>
 </html>

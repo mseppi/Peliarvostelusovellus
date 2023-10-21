@@ -7,14 +7,14 @@
             {% if session.admin_rights %}
                 <p>Olet kirjautunut sisään käyttäjänimellä {{ session.username }} (ylläpitäjä)</p>
                 <a href="/logout">Kirjaudu ulos</a>
-                <a href="/profile">Profiili</a>
+                <a href="/profile/{{ session.username }}">Profiili</a>
                 <a href="/games">Pelit</a>
                 <a href="/add_game">Lisää peli</a>
                 <a href="/users">Käyttäjät</a>
             {% elif session.user_id%}
                 <p>Olet kirjautunut sisään käyttäjänimellä {{ session.username }}</p>
                 <a href="/logout">Kirjaudu ulos</a>
-                <a href="/profile">Profiili</a>
+                <a href="/profile/{{ session.username }}">Profiili</a>
                 <a href="/games">Pelit</a>
                 <a href="/add_game">Lisää peli</a>
             {% else %}

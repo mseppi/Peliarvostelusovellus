@@ -13,7 +13,7 @@
     <ul>
         {% for review in reviews %}
         <li>
-            <p>{{ review['username'] }}</p>
+            <a href="/profile/{{ review['username'] }}">{{ review['username'] }}</a>
             <p>{{ review['title'] }}</p>
             <p>{{ review['review'] }}</p>
             <p>{{ review['rating'] }} *</p>

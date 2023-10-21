@@ -42,11 +42,8 @@ def profile(username):
         sql = text("SELECT username, bio, fav_games FROM profile WHERE username=:username")
         result = db.session.execute(sql, {"username":username})
         profile_data = result.fetchone()
-
         if profile_data:
-            session["bio"] = profile_data[1]
-            session["fav_games"] = profile_data[2]
-            return True
+            return profile_data
         else:
             return False
     except:

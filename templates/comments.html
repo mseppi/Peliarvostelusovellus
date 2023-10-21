@@ -8,7 +8,7 @@
     <ul>
         {% for comment in comments %}
         <li>
-            <p>{{ comment['username'] }}</p>
+            <a href="/profile/{{ comment['username'] }}">{{ comment['username'] }}</a>
             <p>{{ comment['comment'] }}</p>
             <p>{{ comment['date_created'].strftime('%Y-%m-%d %H:%M:%S') }}</p>
             <p>{{ comment['likes'] }}</p>

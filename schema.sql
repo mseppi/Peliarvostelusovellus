@@ -28,7 +28,7 @@ CREATE TABLE games (
 CREATE TABLE reviews (
     id SERIAL PRIMARY KEY,
     title TEXT,
-    username TEXT,
+    username TEXT UNIQUE,
     game_id INTEGER,
     review TEXT,
     rating INTEGER,

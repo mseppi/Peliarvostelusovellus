@@ -42,13 +42,12 @@ def register_route():
         else:
             return render_template("error.html", message="Käyttäjätunnus on jo käytössä")
 
-@app.route("/profile")
-def profile_route():
-    username = session["username"]
+@app.route("/profile/<username>")
+def profile_route(username):
     if profile(username):
-        return render_template("profile.html", bio=session.get("bio"), fav_games=session.get("fav_games"))
+        return render_template("profile.html", bio=profile(username)[1], fav_games=profile(username)[2], username=username)
     else:
-        return render_template("error.html", message="Kirjaudu ensin sisään") 
+        return render_template("error.html", message="Profiilia ei löydy") 
         
         
 @app.route("/update_profile", methods=["GET", "POST"])
@@ -139,7 +138,7 @@ def add_review_route(id):
         elif add_review(title, username, id, review, rating):
             return redirect("/game/" + str(id))
         else:
-            return render_template("error.html", message="Arvostelun lisääminen ei onnistunut")
+            return render_template("error.html", message="Voit lisätä vain yhden arvostelun peliä kohden")
         
 @app.route("/game/<int:id>/comments", methods=["GET", "POST"])
 def comments_route(id):
