@@ -5,8 +5,29 @@
 </head>
 <body>
     <h1>Pelit</h1>
-    <ul>
+    <table>
+        <tr>
+            <th>Pelin nimi</th>
+            <th>Genre</th>
+            <th>Julkaisuvuosi</th>
+            {% if session.admin_rights %}
+            <th>Poista peli</th>
+            {% endif %}
+        </tr>
         {% for game in games %}
-        <li><a href="/game/{{ game.id }}">{{ game.title }}</a></li>
+        <tr>
+            <td><a href="/game/{{ game['id'] }}">{{ game['title'] }}</a></td>
+            <td>{{ game['genre'] }}</td>
+            <td>{{ game['release_year'] }}</td>
+            {% if session.admin_rights %}
+            <td>
+                <form action="/games" method="post">
+                    <input type="hidden" name="game_id" value="{{ game['id'] }}">
+                    <input type="submit" value="Poista">
+                </form>
+            </td>
+            {% endif %}
+        </tr>
         {% endfor %}
+    </table>
 </html>

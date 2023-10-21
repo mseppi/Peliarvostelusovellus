@@ -1,8 +1,8 @@
 from app import app
 from flask import render_template, request, session, redirect
 from os import urandom
-from visits import login, register, logout, profile, update_profile, add_game, get_games, get_game, add_review, get_reviews, get_comments, add_comment
-
+from visits import login, register, logout, profile, update_profile, add_game, get_games, get_game, add_review, get_reviews, get_comments, add_comment, get_users
+from visits import delete_user, delete_game, delete_review, delete_comment
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -10,7 +10,7 @@ def index():
 @app.route("/login", methods=["GET", "POST"])
 def login_route():
     if request.method == "GET":
-        return render_template("login.html")
+        return render_template("index.html")
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
@@ -80,28 +80,46 @@ def add_game_route():
             return render_template("error.html", message="Pelin nimi ja genre eivät voi olla tyhjiä")
         elif len(title) > 50 or len(genre) > 50:
             return render_template("error.html", message="Pelin nimi ja genre eivät voi olla yli 50 merkkiä pitkiä")
-        elif release_year < 1950 or release_year > 2030:
+        elif int(release_year) < 1950 or int(release_year) > 2030:
             return render_template("error.html", message="Pelin julkaisuvuosi ei ole kelvollinen")
         elif add_game(title, genre, release_year):
             return redirect("/")
         else:
             return render_template("error.html", message="Pelin lisääminen ei onnistunut")
 
-@app.route("/games")
+@app.route("/games", methods=["GET", "POST"])
 def games_route():
     if "username" not in session:
         return render_template("error.html", message="Kirjaudu ensin sisään")
-    games = get_games()
-    return render_template("games.html", games=games)
+    if request.method == "GET":
+        games = get_games()
+        return render_template("games.html", games=games)
+    if request.method == "POST":
+        id = request.form["game_id"]
+        if delete_game(id):
+            return redirect("/games")
+        else:
+            return render_template("error.html", message="Pelin poistaminen ei onnistunut")
 
-@app.route("/game/<int:id>")
+
+
+@app.route("/game/<int:id>", methods=["GET", "POST"])
 def game_route(id):
     if "username" not in session:
         return render_template("error.html", message="Kirjaudu ensin sisään")
-    if get_game(id):
-        return render_template("game.html", game=get_game(id), reviews=get_reviews(id), len=len(get_comments(id)))
-    else:
-        return render_template("error.html", message="Peliä ei löydy")
+    if request.method == "GET":
+        if get_game(id):
+            return render_template("game.html", game=get_game(id), reviews=get_reviews(id), len=len(get_comments(id)))
+        else:
+            return render_template("error.html", message="Peliä ei löydy")
+    if request.method == "POST":
+        review_id = request.form["review_id"]
+        if delete_review(review_id):
+            return render_template("game.html", game=get_game(id), reviews=get_reviews(id), len=len(get_comments(id)))
+        else:
+            return render_template("error.html", message="Arvostelun poistaminen ei onnistunut")
+
+
     
 @app.route("/game/<int:id>/add_review", methods=["GET", "POST"])
 def add_review_route(id):
@@ -114,7 +132,7 @@ def add_review_route(id):
         review = request.form["review"]
         title = request.form["title"]
         rating = request.form["rating"]
-        if rating < 1 or rating > 10:
+        if int(rating) < 1 or int(rating) > 10:
             return render_template("error.html", message="Arvostelun tulee olla 1-10 väliltä")
         elif len(review) < 1 or len(title) < 1:
             return render_template("error.html", message="Arvostelun otsikko ja sisältö eivät voi olla tyhjiä")
@@ -141,3 +159,29 @@ def comments_route(id):
             return redirect("/game/" + str(id) + "/comments")
         else:
             return render_template("error.html", message="Kommentin lisääminen ei onnistunut")
+
+@app.route("/users", methods=["GET", "POST"])
+def users_route():
+    if "username" not in session:
+        return render_template("error.html", message="Kirjaudu ensin sisään")
+    if session["admin_rights"] == False:
+        return render_template("error.html", message="Sinulla ei ole oikeuksia tälle sivulle")
+    if request.method == "GET":
+        return render_template("users.html", users=get_users())
+    if request.method == "POST":
+        username = request.form["username"]
+        if username == session["username"]:
+            return render_template("error.html", message="Et voi poistaa itseäsi")
+        elif delete_user(username):
+            return redirect("/users")
+        else:
+            return render_template("error.html", message="Käyttäjän poistaminen ei onnistunut")
+
+@app.route("/comment/delete", methods=["POST"])
+def delete_comment_route():
+    comment_id = request.form["comment_id"]
+    review_id = request.form["review_id"]
+    if delete_comment(comment_id):
+        return redirect("/game/" + str(review_id) + "/comments")
+    else:
+        return render_template("error.html", message="Kommentin poistaminen ei onnistunut")

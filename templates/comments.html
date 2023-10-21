@@ -12,6 +12,13 @@
             <p>{{ comment['comment'] }}</p>
             <p>{{ comment['date_created'].strftime('%Y-%m-%d %H:%M:%S') }}</p>
             <p>{{ comment['likes'] }}</p>
+            {% if session.admin_rights %}
+            <form action="/comment/delete" method="post">
+                <input type="hidden" name="comment_id" value="{{ comment['id'] }}">
+                <input type="hidden" name="review_id" value="{{ id }}">
+                <input type="submit" value="Poista">
+            </form>
+            {% endif %}
         </li>
         {% endfor %}
     </ul>

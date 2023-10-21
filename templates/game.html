@@ -20,6 +20,12 @@
             <p>{{ review['date_created'].strftime('%Y-%m-%d %H:%M:%S') }}</p>
             <p>{{ review['likes'] }}</p>
             <a href="/game/{{ review['id'] }}/comments">Kommentit {{len}}</a>
+            {% if session.admin_rights %}
+            <form action="/game/{{ game['id'] }}" method="post">
+                <input type="hidden" name="review_id" value="{{ review['id'] }}">
+                <input type="submit" value="Poista">
+            </form>
+            {% endif %}
         </li>
         {% endfor %}
     <a href="/">Palaa etusivulle</a>
