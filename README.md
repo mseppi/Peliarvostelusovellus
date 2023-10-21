@@ -13,9 +13,7 @@ Sovellus pelien arvostelemiseen. Sovelluksen ideana on, että käyttäjä voi ki
 Sovellukseen voi kirjautua ja rekisteröityä. Sovelluksen sisällä voi tarkastella omaa profiiliaan. Sovelluksessa voi lisätä pelejä, joihin taas voi lisätä arvosteluja. Arvosteluja voi kommentoida.
 
 ## Puuttuvat ominaisuudet mitkä tehdään ennen loppupalautusta
-- Admin-ominaisuudet
 - CSS
-- Muiden profiilien tarkastelu
 - Tykkääminen
 - CSRF-haavoittuvuuden poistaminen
 - Koodin rakenteen hiominen
