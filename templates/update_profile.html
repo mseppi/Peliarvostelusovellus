@@ -8,6 +8,7 @@
         <form action="/update_profile" method="post">
             <input type="text" name="bio" placeholder="Biografia">
             <input type="text" name="fav_games" placeholder="Suosikkipeli">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             <input type="submit" value="Muuta profiilia">
         </form>
         <a href="/">Palaa etusivulle</a>

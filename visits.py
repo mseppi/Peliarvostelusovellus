@@ -1,5 +1,5 @@
 from db import db
-from flask import session
+from flask import session, request, abort
 from os import urandom
 from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy import text
@@ -189,4 +189,7 @@ def like(username, id):
     except:
         return False
 
+def check_csrf(csrf_token):
+    if session["csrf_token"] != csrf_token:
+        abort(403)
         

@@ -9,6 +9,7 @@
             <input type="text" name="title" placeholder="Pelin nimi">
             <input type="text" name="genre" placeholder="Genre">
             <input type="text" name="release_year" placeholder="Julkaisuvuosi">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             <input type="submit" value="Lisää peli">
         </form>
         <a href="/">Palaa etusivulle</a>

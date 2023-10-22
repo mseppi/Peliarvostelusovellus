@@ -22,11 +22,13 @@
             <form action="/like" method="post">
                 <input type="hidden" name="review_id" value="{{ review['id'] }}">
                 <input type="hidden" name="game_id" value="{{ game['id'] }}">
+                <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
                 <input type="submit" value="Tykkää">
             <a href="/game/{{ review['id'] }}/comments">Kommentit {{len}}</a>
             {% if session.admin_rights %}
             <form action="/game/{{ game['id'] }}" method="post">
                 <input type="hidden" name="review_id" value="{{ review['id'] }}">
+                <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
                 <input type="submit" value="Poista">
             </form>
             {% endif %}

@@ -16,6 +16,7 @@
             <form action="/comment/delete" method="post">
                 <input type="hidden" name="comment_id" value="{{ comment['id'] }}">
                 <input type="hidden" name="review_id" value="{{ id }}">
+                <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
                 <input type="submit" value="Poista">
             </form>
             {% endif %}
@@ -24,6 +25,7 @@
     </ul>
     <form action="/game/{{ id }}/comments" method="post">
         <input type="text" name="comment" placeholder="Kommentti">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         <input type="submit" value="Lisää kommentti">
     <a href="/">Palaa etusivulle</a>
 </body>

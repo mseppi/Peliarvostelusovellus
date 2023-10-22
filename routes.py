@@ -2,7 +2,7 @@ from app import app
 from flask import render_template, request, session, redirect, flash
 from os import urandom
 from visits import login, register, logout, profile, update_profile, add_game, get_games, get_game, add_review, get_reviews, get_comments, add_comment, get_users
-from visits import delete_user, delete_game, delete_review, delete_comment, like
+from visits import delete_user, delete_game, delete_review, delete_comment, like, check_csrf
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -60,6 +60,8 @@ def update_profile_route():
         username = session["username"]
         bio = request.form["bio"]
         fav_games = request.form["fav_games"]
+        csrf_token = request.form["csrf_token"]
+        check_csrf(csrf_token)
         if update_profile(username, bio, fav_games):
             return redirect("/profile")
         else:
@@ -75,6 +77,8 @@ def add_game_route():
         title = request.form["title"]
         genre = request.form["genre"]
         release_year = request.form["release_year"]
+        csrf_token = request.form["csrf_token"]
+        check_csrf(csrf_token)
         if len(title) < 1 or len(genre) < 1:
             return render_template("error.html", message="Pelin nimi ja genre eivät voi olla tyhjiä")
         elif len(title) > 50 or len(genre) > 50:
@@ -95,6 +99,8 @@ def games_route():
         return render_template("games.html", games=games)
     if request.method == "POST":
         id = request.form["game_id"]
+        csrf_token = request.form["csrf_token"]
+        check_csrf(csrf_token)
         if delete_game(id):
             return redirect("/games")
         else:
@@ -113,6 +119,8 @@ def game_route(id):
             return render_template("error.html", message="Peliä ei löydy")
     if request.method == "POST":
         review_id = request.form["review_id"]
+        csrf_token = request.form["csrf_token"]
+        check_csrf(csrf_token)
         if delete_review(review_id):
             return render_template("game.html", game=get_game(id), reviews=get_reviews(id), len=len(get_comments(id)))
         else:
@@ -131,6 +139,8 @@ def add_review_route(id):
         review = request.form["review"]
         title = request.form["title"]
         rating = request.form["rating"]
+        csrf_token = request.form["csrf_token"]
+        check_csrf(csrf_token)
         if int(rating) < 1 or int(rating) > 10:
             return render_template("error.html", message="Arvostelun tulee olla 1-10 väliltä")
         elif len(review) < 1 or len(title) < 1:
@@ -154,6 +164,8 @@ def comments_route(id):
     if request.method == "POST":
         username = session["username"]
         comment = request.form["comment"] 
+        csrf_token = request.form["csrf_token"]
+        check_csrf(csrf_token)
         if add_comment(username, id, comment):
             return redirect("/game/" + str(id) + "/comments")
         else:
@@ -169,6 +181,8 @@ def users_route():
         return render_template("users.html", users=get_users())
     if request.method == "POST":
         username = request.form["username"]
+        csrf_token = request.form["csrf_token"]
+        check_csrf(csrf_token)
         if username == session["username"]:
             return render_template("error.html", message="Et voi poistaa itseäsi")
         elif delete_user(username):
@@ -180,6 +194,8 @@ def users_route():
 def delete_comment_route():
     comment_id = request.form["comment_id"]
     review_id = request.form["review_id"]
+    csrf_token = request.form["csrf_token"]
+    check_csrf(csrf_token)
     if delete_comment(comment_id):
         return redirect("/game/" + str(review_id) + "/comments")
     else:
@@ -190,6 +206,8 @@ def like_route():
     review_id = request.form["review_id"]
     game_id = request.form["game_id"]
     username = session["username"]
+    csrf_token = request.form["csrf_token"]
+    check_csrf(csrf_token)
     if like(username, review_id):
         return redirect("/game/" + str(game_id))
     else:

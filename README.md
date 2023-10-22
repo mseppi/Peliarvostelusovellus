@@ -14,8 +14,6 @@ Sovellukseen voi kirjautua ja rekisteröityä. Sovelluksen sisällä voi tarkast
 
 ## Puuttuvat ominaisuudet mitkä tehdään ennen loppupalautusta
 - CSS
-- Tykkääminen
-- CSRF-haavoittuvuuden poistaminen
 - Koodin rakenteen hiominen
 ## Käynnistysohje paikallisesti
 

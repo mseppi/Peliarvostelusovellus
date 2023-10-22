@@ -24,6 +24,7 @@
                 <td>
                     <form action="/users" method="post">
                         <input type="hidden" name="username" value="{{ user.username }}">
+                        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
                         <input type="submit" value="Poista">
                     </form>
                 </td>
