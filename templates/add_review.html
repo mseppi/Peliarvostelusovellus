@@ -1,16 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="/static/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lisää arvostelu - Peliarvostelusovellus</title>
 </head>
 <body>
+    <div class="header">
+        <h1>Peliarvostelusovellus</h1>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/">Etusivu</a></li>
+            <li><a href="/profile/{{ session.username }}">Profiili</a></li>
+            <li><a href="/games">Pelit</a></li>
+            <li><a href="/add_game">Lisää peli</a></li>
+            <li><a href="/logout">Kirjaudu ulos</a></li>
+        </ul>
+    </nav>
     <h1>Lisää arvostelu</h1>
-    <form action="/game/{{ id }}/add_review" method="post">
-        <input type="text" name="title" placeholder="Otsikko">
-        <input type="text" name="review" placeholder="Sisältö">
-        <input type="number" name="rating" placeholder="Arvosana">
-        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-        <input type="submit" value="Lisää arvostelu">
-    </form>
-    <a href="/">Palaa etusivulle</a>
+    <div class="container">
+        <form action="/game/{{ id }}/add_review" method="post">
+            <input type="text" name="title" placeholder="Otsikko">
+            <textarea name="review" class="textarea" placeholder="Arvostelu"></textarea>
+            <input type="text" name="rating" placeholder="Arvosana 1-10">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            <input type="submit" class="button" value="Lisää arvostelu">
+        </form>
 </html>

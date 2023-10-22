@@ -1,30 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="/static/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Peliarvostelusovellus</title>
     </head>
         <body>
-            {% if session.admin_rights %}
-                <p>Olet kirjautunut sisään käyttäjänimellä {{ session.username }} (ylläpitäjä)</p>
-                <a href="/logout">Kirjaudu ulos</a>
-                <a href="/profile/{{ session.username }}">Profiili</a>
-                <a href="/games">Pelit</a>
-                <a href="/add_game">Lisää peli</a>
+            <div class="header">
+                <h1>Peliarvostelusovellus</h1>
+            </div>
+            {% if session.user_id%}
+                <nav>
+                    <ul>
+                        <li><a href="/">Etusivu</a></li>
+                        <li><a href="/profile/{{ session.username }}">Profiili</a></li>
+                        <li><a href="/games">Pelit</a></li>
+                        <li><a href="/add_game">Lisää peli</a></li>
+                        <li><a href="/logout">Kirjaudu ulos</a></li>
+                    </ul>
+                </nav>
+                {% if session.admin_rights %}
                 <a href="/users">Käyttäjät</a>
-            {% elif session.user_id%}
-                <p>Olet kirjautunut sisään käyttäjänimellä {{ session.username }}</p>
-                <a href="/logout">Kirjaudu ulos</a>
-                <a href="/profile/{{ session.username }}">Profiili</a>
-                <a href="/games">Pelit</a>
-                <a href="/add_game">Lisää peli</a>
+                {% endif %}
+                <h1>Tervetuloa {{session.username}}!</h1>
             {% else %}
-            <p>Kirjaudu sisään</p>
-            <form action="/login" method="post">
-                <input type="text" name="username" placeholder="Käyttäjätunnus">
-                <input type="password" name="password" placeholder="Salasana">
-                <input type="submit" value="Kirjaudu sisään">
-            </form>
-            <a href="/register">Rekisteröidy</a>
+            <h1>Kirjaudu sisään</h1>
+            <div class="container">
+                <form action="/login" method="post">
+                    <input type="text" name="username" id="username" placeholder="Käyttäjätunnus">
+                    <input type="password" name="password" id="password" placeholder="Salasana">
+                    <input type="submit" class="button" value="Kirjaudu sisään">
+                </form>
+            </div>
+            <div class="register">
+                <p>Eikö sinulla ole vielä tunnuksia?</p>
+                <a href="/register">Rekisteröidy</a>
+            </div>
             {% endif %}
         </body>
 </html>

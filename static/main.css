@@ -1,0 +1,145 @@
+body {
+    background-color: #f5f5f5;
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    color: #333;
+    max-width: 45em;
+    margin: auto;
+}
+
+nav {
+    background-color: #00ff55;
+    padding: 1em;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 2em;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav li {
+    display: inline-block;
+    margin: 0 1em;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #4CAF50;
+}
+
+.header {
+    background: rgb(0, 214, 11);
+    font-weight: bold;
+    padding: 1em 4em;
+    font-size: 1.5em;
+}
+
+.container {
+    padding: 16px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.container input[type=text], .container input[type=password], .container textarea{
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #ffffff;
+}
+
+.container input[type=text]:focus, .container input[type=password]:focus, .container textarea:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+.container .button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 110%;
+    opacity: 0.9;
+}
+
+.container .button:hover {
+    opacity: 1;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2em;
+    margin: 1em 0;
+}
+
+.bio {
+    padding: 16px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    width: 300px;
+    margin: 0 auto;
+    overflow-x: auto;
+}
+
+.bio p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.bio .like {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 34px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.bio .comment {
+    background-color: #008CBA; /* Blue */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f2f2f2;
+    color: #333;
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}

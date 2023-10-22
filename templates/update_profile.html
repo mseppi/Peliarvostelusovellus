@@ -1,16 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="/static/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Muuta profiilia - Peliarvostelusovellus</title>
 </head>
     <body>
+        <div class="header">
+            <h1>Peliarvostelusovellus</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">Etusivu</a></li>
+                <li><a href="/profile/{{ session.username }}">Profiili</a></li>
+                <li><a href="/games">Pelit</a></li>
+                <li><a href="/add_game">Lisää peli</a></li>
+                <li><a href="/logout">Kirjaudu ulos</a></li>
+            </ul>
+        </nav>
         <h1>Muuta profiilia</h1>
-        <form action="/update_profile" method="post">
-            <input type="text" name="bio" placeholder="Biografia">
-            <input type="text" name="fav_games" placeholder="Suosikkipeli">
-            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-            <input type="submit" value="Muuta profiilia">
+        <div class="container">
+            <form action="/update_profile" method="post">
+                <textarea name="bio" class="textarea" placeholder="Biografia"></textarea>
+                <input type="text" name="fav_games" placeholder="Suosikkipeli">
+                <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+                <input type="submit" class="button" value="Muuta profiilia">
+        </div>
         </form>
-        <a href="/">Palaa etusivulle</a>
     </body>
 </html>

@@ -2,16 +2,29 @@
 <html>
 <head>
     <title>Kommentit - Peliarvostelusovellus</title>
+    <link rel="stylesheet" type="text/css" href="/static/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+    <div class="header">
+        <h1>Peliarvostelusovellus</h1>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/">Etusivu</a></li>
+            <li><a href="/profile/{{ session.username }}">Profiili</a></li>
+            <li><a href="/games">Pelit</a></li>
+            <li><a href="/add_game">Lisää peli</a></li>
+            <li><a href="/logout">Kirjaudu ulos</a></li>
+        </ul>
+    </nav>
     <h1>Kommentit</h1>
     <ul>
         {% for comment in comments %}
         <li>
-            <a href="/profile/{{ comment['username'] }}">{{ comment['username'] }}</a>
+            Käyttäjänimi: <a href="/profile/{{ comment['username'] }}">{{ comment['username'] }}</a>
             <p>{{ comment['comment'] }}</p>
             <p>{{ comment['date_created'].strftime('%Y-%m-%d %H:%M:%S') }}</p>
-            <p>{{ comment['likes'] }}</p>
             {% if session.admin_rights %}
             <form action="/comment/delete" method="post">
                 <input type="hidden" name="comment_id" value="{{ comment['id'] }}">
@@ -23,10 +36,13 @@
         </li>
         {% endfor %}
     </ul>
-    <form action="/game/{{ id }}/comments" method="post">
-        <input type="text" name="comment" placeholder="Kommentti">
-        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-        <input type="submit" value="Lisää kommentti">
-    <a href="/">Palaa etusivulle</a>
-</body>
+    <h2>Lisää kommentti</h2>
+    <div class="container">     
+        <form action="/game/{{ id }}/comments" method="post">
+            <textarea name="comment" placeholder="Kommentti"></textarea>
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            <input type="submit" class="button" value="Lisää kommentti">
+        </form>
+    </div>
+    </body>
 </html>

@@ -63,7 +63,7 @@ def update_profile_route():
         csrf_token = request.form["csrf_token"]
         check_csrf(csrf_token)
         if update_profile(username, bio, fav_games):
-            return redirect("/profile")
+            return redirect("/profile/" + username + "")
         else:
             return render_template("error.html", message="Profiilin päivittäminen ei onnistunut")
 
@@ -83,6 +83,8 @@ def add_game_route():
             return render_template("error.html", message="Pelin nimi ja genre eivät voi olla tyhjiä")
         elif len(title) > 50 or len(genre) > 50:
             return render_template("error.html", message="Pelin nimi ja genre eivät voi olla yli 50 merkkiä pitkiä")
+        elif release_year.isnumeric() == False:
+            return render_template("error.html", message="Pelin julkaisuvuosi ei ole numero")
         elif int(release_year) < 1950 or int(release_year) > 2030:
             return render_template("error.html", message="Pelin julkaisuvuosi ei ole kelvollinen")
         elif add_game(title, genre, release_year):

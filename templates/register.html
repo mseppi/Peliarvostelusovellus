@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="/static/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Rekisteröidy - Peliarvostelusovellus</title>
     </head>
         <body>
+            <div class="header">
+                <h1>Peliarvostelusovellus</h1>
+            </div>
             <h1>Rekisteröidy</h1>
-            <form action="/register" method="post">
-                <input type="text" name="username" placeholder="Käyttäjätunnus">
-                <input type="password" name="password" placeholder="Salasana">
-                <input type="password" name="password2" placeholder="Salasana uudelleen">
-                <input type="submit" value="Rekisteröidy">
-            </form>
+            <div class="container">
+                <form action="/register" method="post">
+                    <input type="text" name="username" placeholder="Käyttäjätunnus">
+                    <input type="password" name="password" placeholder="Salasana">
+                    <input type="password" name="password2" placeholder="Salasana uudelleen">
+                    <input type="submit" class="button" value="Rekisteröidy">
+                </form>
+            </div>
             <a href="/">Palaa etusivulle</a>
         </html>

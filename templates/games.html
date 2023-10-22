@@ -1,9 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="/static/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Pelit - Peliarvostelusovellus</title>
 </head>
 <body>
+    <div class="header">
+        <h1>Peliarvostelusovellus</h1>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/">Etusivu</a></li>
+            <li><a href="/profile/{{ session.username }}">Profiili</a></li>
+            <li><a href="/games">Pelit</a></li>
+            <li><a href="/add_game">Lisää peli</a></li>
+            <li><a href="/logout">Kirjaudu ulos</a></li>
+        </ul>
+    </nav>
     <h1>Pelit</h1>
     <table>
         <tr>

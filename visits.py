@@ -69,7 +69,7 @@ def add_game(title, genre, release_year):
     
 def get_games():
     try:
-        sql = text("SELECT * FROM games")
+        sql = text("SELECT * FROM games ORDER BY title ASC")
         result = db.session.execute(sql)
         return result.fetchall()
     except:
@@ -95,7 +95,7 @@ def add_review(title, username, game_id, review, rating):
     
 def get_reviews(game_id):
     try:
-        sql = text("SELECT * FROM reviews WHERE game_id=:game_id")
+        sql = text("SELECT * FROM reviews WHERE game_id=:game_id ORDER BY id DESC")
         result = db.session.execute(sql, {"game_id":game_id})
         return result.fetchall()
     except:
@@ -112,7 +112,7 @@ def add_comment(username, review_id, comment):
 
 def get_comments(review_id):
     try:
-        sql = text("SELECT * FROM comments WHERE review_id=:review_id")
+        sql = text("SELECT * FROM comments WHERE review_id=:review_id ORDER BY id DESC")
         result = db.session.execute(sql, {"review_id":review_id})
         return result.fetchall()
     except:

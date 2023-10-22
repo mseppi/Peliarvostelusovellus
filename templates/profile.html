@@ -1,16 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="/static/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Profiili - Peliarvostelusovellus</title>
     </head>
         <body>
-            <h1>Profiili</h1>
-            <p>{{ username }}</p>
-            <p>biografia: {{ bio }}</p>
-            <p>suosikkipeli: {{ fav_games }}</p>
-            <a href="/">Etusivulle</a>
+            <div class="header">
+                <h1>Peliarvostelusovellus</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/">Etusivu</a></li>
+                    <li><a href="/profile/{{ session.username }}">Profiili</a></li>
+                    <li><a href="/games">Pelit</a></li>
+                    <li><a href="/add_game">Lisää peli</a></li>
+                    <li><a href="/logout">Kirjaudu ulos</a></li>
+                </ul>
+            </nav>
+            <h1>Käyttäjän {{username}} profiili</h1>
+            <div class="bio">
+                <p>suosikkipeli: {{ fav_games }}</p>
+                <p>biografia: {{ bio }}</p>
+            </div>
             {% if username == session["username"] %}
-            <a href="/update_profile">Muuta profiilia</a>
+            <div class="container">
+                <a href="/update_profile">Muuta profiilia</a>
+            </div>
             {% endif %}
         </body>
 </html>
