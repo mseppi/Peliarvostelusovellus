@@ -1,5 +1,5 @@
 # Peliarvostelusovellus
-Sovellus pelien arvostelemiseen. Sovelluksen ideana on, että käyttäjä voi kirjautua sivulle, jossa on pelejä, joita voi arvostella.
+Sovellus pelien arvostelemiseen. Sovelluksen ideana on, että käyttäjä voi kirjautua sivulle, jossa on pelejä, joita voi arvostella. Sivustolle voi myös itse lisätä pelejä ja arvosteluille kommentteja.
 
 ### Ominaisuuksiin kuuluu
 - Sisäänkirjautuminen ja rekisteröityminen
@@ -7,10 +7,8 @@ Sovellus pelien arvostelemiseen. Sovelluksen ideana on, että käyttäjä voi ki
 - Arvostelujen kommentoiminen
 - Arvosteluista tykkääminen
 - Profiilin tarkisteleminen ja muokkaaminen
-- Ylläpitäjä voi poistaa postauksia ja käyttäjiä
-
-## Tämänhetkinen tilanne
-Sovellukseen voi kirjautua ja rekisteröityä. Sovelluksen sisällä voi tarkastella omaa profiiliaan. Sovelluksessa voi lisätä pelejä, joihin taas voi lisätä arvosteluja. Arvosteluja voi kommentoida.
+- Muiden profiilien tarkasteleminen klikkaamalla heidän kommentteja tai arvosteluja
+- Ylläpitäjä voi poistaa postauksia, käyttäjiä ja kommentteja.
 
 ## Käynnistysohje paikallisesti
 
@@ -33,3 +31,11 @@ SECRET_KEY=salainen-avain
 - Käynnistä sovellus komennolla ```flask run```
 - Tee sovellukselle käyttäjä ja kirjaudu sisään
 - Jos haluat testata ylläpitäjän oikeuksia, kirjaudu käyttäjällä admin admin
+
+## Sovelluksen jatkoideoita
+- Käyttäjähaku
+- Muiden käyttäjien nostaminen ylläpitäjäksi
+- Kommenttimäärän näkyminen
+- Vieläkin helpompi navigointi
+- Profiilin laajentaminen
+- Ulkonäön kohentaminen
