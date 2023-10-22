@@ -193,6 +193,5 @@ def like_route():
     if like(username, review_id):
         return redirect("/game/" + str(game_id))
     else:
-        flash("Olet jo tykännyt tästä")
         return redirect("/game/" + str(game_id))
     
