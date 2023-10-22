@@ -1,8 +1,8 @@
 from app import app
-from flask import render_template, request, session, redirect
+from flask import render_template, request, session, redirect, flash
 from os import urandom
 from visits import login, register, logout, profile, update_profile, add_game, get_games, get_game, add_review, get_reviews, get_comments, add_comment, get_users
-from visits import delete_user, delete_game, delete_review, delete_comment
+from visits import delete_user, delete_game, delete_review, delete_comment, like
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -153,7 +153,7 @@ def comments_route(id):
             return render_template("error.html", message="Kommenttien lataaminen ei onnistunut")
     if request.method == "POST":
         username = session["username"]
-        comment = request.form["comment"]
+        comment = request.form["comment"] 
         if add_comment(username, id, comment):
             return redirect("/game/" + str(id) + "/comments")
         else:
@@ -184,3 +184,15 @@ def delete_comment_route():
         return redirect("/game/" + str(review_id) + "/comments")
     else:
         return render_template("error.html", message="Kommentin poistaminen ei onnistunut")
+
+@app.route("/like", methods=["POST"])
+def like_route():
+    review_id = request.form["review_id"]
+    game_id = request.form["game_id"]
+    username = session["username"]
+    if like(username, review_id):
+        return redirect("/game/" + str(game_id))
+    else:
+        flash("Olet jo tykännyt tästä")
+        return redirect("/game/" + str(game_id))
+    

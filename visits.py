@@ -156,6 +156,8 @@ def delete_review(id):
         db.session.execute(sql, {"id":id})
         sql2 = text("DELETE FROM comments WHERE review_id=:id")
         db.session.execute(sql2, {"id":id})
+        sql3 = text("DELETE FROM likes WHERE review_id=:id")
+        db.session.execute(sql3, {"id":id})
         db.session.commit()
         return True
     except:
@@ -169,7 +171,22 @@ def delete_game(id):
         db.session.execute(sql2, {"id":id})
         sql3 = text("DELETE FROM comments WHERE review_id IN (SELECT id FROM reviews WHERE game_id=:id)")
         db.session.execute(sql3, {"id":id})
+        sql4 = text("DELETE FROM likes WHERE review_id IN (SELECT id FROM reviews WHERE game_id=:id)")
+        db.session.execute(sql4, {"id":id})
         db.session.commit()
         return True
     except:
         return False
+    
+def like(username, id):
+    try:
+        sql = text("INSERT INTO likes (username, review_id) VALUES (:username, :id)")   
+        db.session.execute(sql, {"username":username, "id":id})
+        sql2 = text("UPDATE reviews SET likes=likes+1 WHERE id=:id")
+        db.session.execute(sql2, {"id":id})
+        db.session.commit()
+        return True
+    except:
+        return False
+
+        

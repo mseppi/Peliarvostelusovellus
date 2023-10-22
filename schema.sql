@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS profile CASCADE;
 DROP TABLE IF EXISTS games CASCADE;
 DROP TABLE IF EXISTS reviews CASCADE;
 DROP TABLE IF EXISTS comments CASCADE;
+DROP TABLE IF EXISTS likes CASCADE;
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
@@ -43,6 +44,12 @@ CREATE TABLE comments (
     comment TEXT,
     likes INTEGER default 0,
     date_created TIMESTAMP default CURRENT_TIMESTAMP
+);
+
+CREATE TABLE likes (
+    id SERIAL PRIMARY KEY,
+    username TEXT UNIQUE,
+    review_id INTEGER
 );
 
 INSERT INTO users (username, pword, admin_rights) VALUES ('admin', 'pbkdf2:sha256:600000$gxFzxmYkY6rCUedn$88417f36ff1bdac3d4b7e42905b4a54ba1af12c77249cf97b1375aae165f5a99', TRUE);
