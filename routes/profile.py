@@ -1,3 +1,6 @@
+"""
+Contains routes for profile page and updating profile
+"""
 from app import app
 from flask import redirect, render_template, request, session
 from db_account import check_csrf
@@ -5,14 +8,16 @@ from db_profile import profile, update_profile
 
 @app.route("/profile/<username>")
 def profile_route(username):
+    """Handles showing profile"""
     if profile(username):
-        return render_template("profile.html", bio=profile(username)[1], fav_games=profile(username)[2], username=username)
-    else:
-        return render_template("error.html", message="Profiilia ei löydy") 
-        
-        
+        return render_template(
+            "profile.html", bio=profile(username)[1],
+             fav_games=profile(username)[2], username=username)
+    return render_template("error.html", message="Profiilia ei löydy")
+
 @app.route("/update_profile", methods=["GET", "POST"])
 def update_profile_route():
+    """Handles updating profile"""
     if "username" not in session:
         return render_template("error.html", message="Kirjaudu ensin sisään")
     if request.method == "GET":
@@ -25,5 +30,4 @@ def update_profile_route():
         check_csrf(csrf_token)
         if update_profile(username, bio, fav_games):
             return redirect("/profile/" + username + "")
-        else:
-            return render_template("error.html", message="Profiilin päivittäminen ei onnistunut")
+        return render_template("error.html", message="Profiilin päivittäminen ei onnistunut")

@@ -1,10 +1,14 @@
+"""
+Contains functions to handle user accounts in database
+"""
+from os import urandom
 from db import db
 from flask import session, abort
 from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy import text
-from os import urandom
 
 def login(username, password):
+    """Check if username and password match"""
     sql = text("SELECT pword, id, admin_rights FROM users WHERE username=:username")
     result = db.session.execute(sql, {"username": username})
     user = result.fetchone()
@@ -19,6 +23,7 @@ def login(username, password):
     return False
 
 def register(username, password):
+    """Register a new user"""
     hash_value = generate_password_hash(password)
     try:
         sql = text("INSERT INTO users (username, pword) VALUES (:username, :pword)")
@@ -28,13 +33,15 @@ def register(username, password):
         db.session.commit()
         return True
     except:
-       return False
-    
+        return False
+
 def check_csrf(csrf_token):
+    """Check if the CSRF token is valid"""
     if session["csrf_token"] != csrf_token:
         abort(403)
 
 def logout():
+    """Logout the current user"""
     del session["user_id"]
     del session["username"]
     del session["csrf_token"]
