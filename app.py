@@ -6,4 +6,8 @@ app = Flask(__name__)
 load_dotenv()
 app.secret_key = getenv("SECRET_KEY")
 
-import routes
+from routes import account
+from routes import mods
+from routes import profile
+from routes import games
+from routes import comments

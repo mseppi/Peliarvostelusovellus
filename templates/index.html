@@ -20,7 +20,9 @@
                     </ul>
                 </nav>
                 {% if session.admin_rights %}
-                <a href="/users">Käyttäjät</a>
+                <div class="container">
+                    <a href="/users" class="button">Käyttäjät</a>
+                </div>
                 {% endif %}
                 <h1>Tervetuloa {{session.username}}!</h1>
             {% else %}
@@ -32,9 +34,9 @@
                     <input type="submit" class="button" value="Kirjaudu sisään">
                 </form>
             </div>
-            <div class="register">
+            <div class="container">
                 <p>Eikö sinulla ole vielä tunnuksia?</p>
-                <a href="/register">Rekisteröidy</a>
+                <a href="/register" class="button">Rekisteröidy</a>
             </div>
             {% endif %}
         </body>

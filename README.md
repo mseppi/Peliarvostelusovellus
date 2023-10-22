@@ -12,9 +12,6 @@ Sovellus pelien arvostelemiseen. Sovelluksen ideana on, että käyttäjä voi ki
 ## Tämänhetkinen tilanne
 Sovellukseen voi kirjautua ja rekisteröityä. Sovelluksen sisällä voi tarkastella omaa profiiliaan. Sovelluksessa voi lisätä pelejä, joihin taas voi lisätä arvosteluja. Arvosteluja voi kommentoida.
 
-## Puuttuvat ominaisuudet mitkä tehdään ennen loppupalautusta
-- CSS
-- Koodin rakenteen hiominen
 ## Käynnistysohje paikallisesti
 
 - Asenna PostgreSQL kurssin ohjeiden mukaisesti
@@ -35,3 +32,4 @@ SECRET_KEY=salainen-avain
 - Määritä sovelluksen tietokanta komennolla ```psql<schema.sql```
 - Käynnistä sovellus komennolla ```flask run```
 - Tee sovellukselle käyttäjä ja kirjaudu sisään
+- Jos haluat testata ylläpitäjän oikeuksia, kirjaudu käyttäjällä admin admin
