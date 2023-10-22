@@ -17,7 +17,6 @@ Sovellukseen voi kirjautua ja rekisteröityä. Sovelluksen sisällä voi tarkast
 - Tykkääminen
 - CSRF-haavoittuvuuden poistaminen
 - Koodin rakenteen hiominen
-
 ## Käynnistysohje paikallisesti
 
 - Asenna PostgreSQL kurssin ohjeiden mukaisesti

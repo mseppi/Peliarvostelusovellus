@@ -84,7 +84,7 @@ def add_game_route():
         elif add_game(title, genre, release_year):
             return redirect("/")
         else:
-            return render_template("error.html", message="Pelin lisääminen ei onnistunut")
+            return render_template("error.html", message="Järjestelmässä on jo tämän niminen peli")
 
 @app.route("/games", methods=["GET", "POST"])
 def games_route():

@@ -19,6 +19,10 @@
             <p>{{ review['rating'] }} *</p>
             <p>{{ review['date_created'].strftime('%Y-%m-%d %H:%M:%S') }}</p>
             <p>{{ review['likes'] }}</p>
+            <form action="/like" method="post">
+                <input type="hidden" name="review_id" value="{{ review['id'] }}">
+                <input type="hidden" name="game_id" value="{{ game['id'] }}">
+                <input type="submit" value="Tykkää">
             <a href="/game/{{ review['id'] }}/comments">Kommentit {{len}}</a>
             {% if session.admin_rights %}
             <form action="/game/{{ game['id'] }}" method="post">
