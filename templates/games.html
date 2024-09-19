@@ -3,29 +3,29 @@
 <head>
     <link rel="stylesheet" type="text/css" href="/static/main.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pelit - Peliarvostelusovellus</title>
+    <title>Games - Game review application</title>
 </head>
 <body>
     <div class="header">
-        <h1>Peliarvostelusovellus</h1>
+        <h1>Game review application</h1>
     </div>
     <nav>
         <ul>
-            <li><a href="/">Etusivu</a></li>
-            <li><a href="/profile/{{ session.username }}">Profiili</a></li>
-            <li><a href="/games">Pelit</a></li>
-            <li><a href="/add_game">Lisää peli</a></li>
-            <li><a href="/logout">Kirjaudu ulos</a></li>
+            <li><a href="/">Front page</a></li>
+            <li><a href="/profile/{{ session.username }}">Profile</a></li>
+            <li><a href="/games">Games</a></li>
+            <li><a href="/add_game">Add game</a></li>
+            <li><a href="/logout">Logout</a></li>
         </ul>
     </nav>
-    <h1>Pelit</h1>
+    <h1>Games</h1>
     <table>
         <tr>
-            <th>Pelin nimi</th>
+            <th>Game name</th>
             <th>Genre</th>
-            <th>Julkaisuvuosi</th>
+            <th>Release year</th>
             {% if session.admin_rights %}
-            <th>Poista peli</th>
+            <th>Remove game</th>
             {% endif %}
         </tr>
         {% for game in games %}
@@ -38,7 +38,7 @@
                 <form action="/games" method="post">
                     <input type="hidden" name="game_id" value="{{ game['id'] }}">
                     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-                    <input type="submit" value="Poista">
+                    <input type="submit" value="Remove">
                 </form>
             </td>
             {% endif %}

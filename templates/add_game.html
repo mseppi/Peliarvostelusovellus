@@ -3,11 +3,11 @@
 <head>
     <link rel="stylesheet" type="text/css" href="/static/main.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lisää peli - Peliarvostelusovellus</title>
+    <title>Add game - Game review application</title>
 </head>
     <body>
         <div class="header">
-            <h1>Peliarvostelusovellus</h1>
+            <h1>Game review application</h1>
         </div>
         <nav>
             <ul>
@@ -18,14 +18,14 @@
                 <li><a href="/logout">Kirjaudu ulos</a></li>
             </ul>
         </nav>
-        <h1>Lisää peli</h1>
+        <h1>Add game</h1>
         <div class="container">
             <form action="/add_game" method="post">
-                <input type="text" name="title" placeholder="Pelin nimi">
+                <input type="text" name="title" placeholder="Name of the game">
                 <input type="text" name="genre" placeholder="Genre">
-                <input type="text" name="release_year" placeholder="Julkaisuvuosi">
+                <input type="text" name="release_year" placeholder="Release year">
                 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-                <input type="submit" class="button" value="Lisää peli">
+                <input type="submit" class="button" value="Add game">
             </form> 
         </div>
     </body>

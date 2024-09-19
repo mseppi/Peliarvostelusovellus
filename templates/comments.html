@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Kommentit - Peliarvostelusovellus</title>
+    <title>Comments - Game review application</title>
     <link rel="stylesheet" type="text/css" href="/static/main.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
     <div class="header">
-        <h1>Peliarvostelusovellus</h1>
+        <h1>Game review application</h1>
     </div>
     <nav>
         <ul>
-            <li><a href="/">Etusivu</a></li>
-            <li><a href="/profile/{{ session.username }}">Profiili</a></li>
-            <li><a href="/games">Pelit</a></li>
-            <li><a href="/add_game">Lisää peli</a></li>
-            <li><a href="/logout">Kirjaudu ulos</a></li>
+            <li><a href="/">Front page</a></li>
+            <li><a href="/profile/{{ session.username }}">Profile</a></li>
+            <li><a href="/games">Games</a></li>
+            <li><a href="/add_game">Add game</a></li>
+            <li><a href="/logout">Logout</a></li>
         </ul>
     </nav>
-    <h1>Kommentit</h1>
+    <h1>Comments</h1>
     <ul>
         {% for comment in comments %}
         <li>
@@ -30,7 +30,7 @@
                 <input type="hidden" name="comment_id" value="{{ comment['id'] }}">
                 <input type="hidden" name="review_id" value="{{ id }}">
                 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-                <input type="submit" value="Poista">
+                <input type="submit" value="Remove">
             </form>
             {% endif %}
         </li>
@@ -39,9 +39,9 @@
     <h2>Lisää kommentti</h2>
     <div class="container">     
         <form action="/game/{{ id }}/comments" method="post">
-            <textarea name="comment" placeholder="Kommentti"></textarea>
+            <textarea name="comment" placeholder="Comments"></textarea>
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-            <input type="submit" class="button" value="Lisää kommentti">
+            <input type="submit" class="button" value="Add comment">
         </form>
     </div>
     </body>

@@ -3,27 +3,27 @@
 <head>
     <link rel="stylesheet" type="text/css" href="/static/main.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Peliarvostelusovellus - {{ game['title'] }}</title>
+    <title>Game review application - {{ game['title'] }}</title>
 </head>
 <body>
     <div class="header">
-        <h1>Peliarvostelusovellus</h1>
+        <h1>Game review application</h1>
     </div>
     <nav>
         <ul>
-            <li><a href="/">Etusivu</a></li>
-            <li><a href="/profile/{{ session.username }}">Profiili</a></li>
-            <li><a href="/games">Pelit</a></li>
-            <li><a href="/add_game">Lisää peli</a></li>
-            <li><a href="/logout">Kirjaudu ulos</a></li>
+            <li><a href="/">Front page</a></li>
+            <li><a href="/profile/{{ session.username }}">Profile</a></li>
+            <li><a href="/games">Games</a></li>
+            <li><a href="/add_game">Add game</a></li>
+            <li><a href="/logout">Logout</a></li>
         </ul>
     </nav>
     <h1>{{ game['title'] }}</h1>
     <p>Genre: {{ game['genre'] }}</p>
-    <p>Julkaisuvuosi: {{ game['release_year'] }}</p>
-    <a href="/game/{{ game['id'] }}/add_review">Lisää arvostelu</a>
+    <p>Release year: {{ game['release_year'] }}</p>
+    <a href="/game/{{ game['id'] }}/add_review">Add review</a>
     {% if reviews|length > 0 %}
-    <h2>Arvostelut</h2>
+    <h2>Reviews</h2>
     <ul>
         {% for review in reviews %}
         <div class="bio">
@@ -31,16 +31,16 @@
                 <a href="/profile/{{ review['username'] }}">{{ review['username'] }}</a>
                 <h2>{{ review['title'] }}</h2>
                 <p>{{ review['review'] }}</p>
-                <p>Arvosana: {{ review['rating'] }}/10</p>
-                <p>Tykkäykset: {{ review['likes'] }}</p>
+                <p>Grade {{ review['rating'] }}/10</p>
+                <p>Likes {{ review['likes'] }}</p>
                 <p>{{ review['date_created'].strftime('%Y-%m-%d %H:%M:%S') }}</p>
                 <form action="/like" method="post">
                     <input type="hidden" name="review_id" value="{{ review['id'] }}">
                     <input type="hidden" name="game_id" value="{{ game['id'] }}">
                     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-                    <input type="submit" class="like" value="Tykkää">
+                    <input type="submit" class="like" value="Like">
                 </form>
-                <a href="/game/{{ review['id'] }}/comments" class="comment">Kommentit</a>
+                <a href="/game/{{ review['id'] }}/comments" class="comment">Comments</a>
                 {% if session.admin_rights %}
                 <form action="/game/{{ game['id'] }}" method="post">
                     <input type="hidden" name="review_id" value="{{ review['id'] }}">
