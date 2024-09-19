@@ -1,7 +1,6 @@
 # CSB Project1 branch
 
-This branch was made for [Cyber security base project 1](https://cybersecuritybase.mooc.fi/module-3.1). Goal of the project is to make a software with security flaws according to OWASP top ten list and fix them with report.
-
+This branch was made for [Cyber security base project 1](https://cybersecuritybase.mooc.fi/module-3.1). Goal of the project is to make a software with security flaws according to OWASP top ten list and fix them while documenting it all in a report.
 
 # Game Review Application
 An application for reviewing games. The idea of the app is that users can log in to a page where there are games available for review. Users can also add their own games to the site and comment on reviews.
