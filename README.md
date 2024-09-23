@@ -34,7 +34,7 @@ SECRET_KEY=secret key
 - Set up application database using command ```psql<schema.sql```
 - Start the application with command ```flask run```
 - Create user and login
-- In the normal app you could test the admin rights with the login and password admin admin, but I disabled it in this branch
+- "admin admin" accesses the admin account for the sake of testing purposes
 
 ## Future ideas for the application
 - User search
