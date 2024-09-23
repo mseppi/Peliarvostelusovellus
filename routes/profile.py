@@ -13,13 +13,13 @@ def profile_route(username):
         return render_template(
             "profile.html", bio=profile(username)[1],
              fav_games=profile(username)[2], username=username)
-    return render_template("error.html", message="Profiilia ei löydy")
+    return render_template("error.html", message="Profile not found")
 
 @app.route("/update_profile", methods=["GET", "POST"])
 def update_profile_route():
     """Handles updating profile"""
     if "username" not in session:
-        return render_template("error.html", message="Kirjaudu ensin sisään")
+        return render_template("error.html", message="Log in first")
     if request.method == "GET":
         return render_template("update_profile.html")
     if request.method == "POST":
@@ -30,4 +30,4 @@ def update_profile_route():
         check_csrf(csrf_token)
         if update_profile(username, bio, fav_games):
             return redirect("/profile/" + username + "")
-        return render_template("error.html", message="Profiilin päivittäminen ei onnistunut")
+        return render_template("error.html", message="Updating profile failed")

@@ -21,7 +21,7 @@ def login_route():
         password = request.form["password"]
         if login(username, password):
             return redirect("/")
-        return render_template("error.html", message="Väärä tunnus tai salasana")
+        return render_template("error.html", message="Wrong username or password")
 
 @app.route("/logout")
 def logout_route():
@@ -39,12 +39,12 @@ def register_route():
         password = request.form["password"]
         password2 = request.form["password2"]
         if password != password2:
-            return render_template("error.html", message="Salasanat eivät täsmää")
+            return render_template("error.html", message="Passwords dont match")
         elif len(username) < 3 or len(password) < 3:
             return render_template(
                 "error.html",
-                  message="Käyttäjätunnuksen ja salasanan tulee olla vähintään 3 merkkiä pitkiä")
+                  message="Username and password must be at least 3 characters long")
         elif register(username, password):
             return redirect("/")
         else:
-            return render_template("error.html", message="Käyttäjätunnus on jo käytössä")
+            return render_template("error.html", message="Username already exists")
