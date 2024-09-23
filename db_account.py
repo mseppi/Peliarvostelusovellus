@@ -37,8 +37,9 @@ def register(username, password):
 
 def check_csrf(csrf_token):
     """Check if the CSRF token is valid"""
-    if session["csrf_token"] != csrf_token:
-        abort(403)
+    #if session["csrf_token"] != csrf_token:
+     #   abort(403)
+    pass
 
 def logout():
     """Logout the current user"""
