@@ -12,7 +12,7 @@ from db_comments import get_reviews, get_comments
 def add_game_route():
     """Handles adding games"""
     if "username" not in session:
-        return render_template("error.html", message="Kirjaudu ensin sisään")
+        return render_template("error.html", message="Log in first")
     if request.method == "GET":
         return render_template("add_game.html")
     if request.method == "POST":
@@ -23,23 +23,23 @@ def add_game_route():
         check_csrf(csrf_token)
         if len(title) < 1 or len(genre) < 1:
             return render_template(
-                "error.html", message="Pelin nimi ja genre eivät voi olla tyhjiä")
+                "error.html", message="Title and genre cannot be empty")
         elif len(title) > 50 or len(genre) > 50:
             return render_template(
-                "error.html", message="Pelin nimi ja genre eivät voi olla yli 50 merkkiä pitkiä")
+                "error.html", message="Title and genre must be under 50 characters")
         elif release_year.isnumeric() == False:
-            return render_template("error.html", message="Pelin julkaisuvuosi ei ole numero")
+            return render_template("error.html", message="Release year must be a number")
         elif int(release_year) < 1950 or int(release_year) > 2030:
-            return render_template("error.html", message="Pelin julkaisuvuosi ei ole kelvollinen")
+            return render_template("error.html", message="Release year must be between 1950 and 2030")
         elif add_game(title, genre, release_year):
             return redirect("/")
-        return render_template("error.html", message="Järjestelmässä on jo tämän niminen peli")
+        return render_template("error.html", message="Adding game failed")
 
 @app.route("/games", methods=["GET", "POST"])
 def games_route():
     """Handles showing games and deleting games"""
     if "username" not in session:
-        return render_template("error.html", message="Kirjaudu ensin sisään")
+        return render_template("error.html", message="Log in first")
     if request.method == "GET":
         games = get_games()
         return render_template("games.html", games=games)
@@ -49,18 +49,18 @@ def games_route():
         check_csrf(csrf_token)
         if delete_game(id):
             return redirect("/games")
-        return render_template("error.html", message="Pelin poistaminen ei onnistunut")
+        return render_template("error.html", message="Deleting game failed")
 
 @app.route("/game/<int:id>", methods=["GET", "POST"])
 def game_route(id):
     """Handles showing games and deleting reviews"""
     if "username" not in session:
-        return render_template("error.html", message="Kirjaudu ensin sisään")
+        return render_template("error.html", message="Log in first")
     if request.method == "GET":
         if get_game(id):
             return render_template(
                 "game.html", game=get_game(id), reviews=get_reviews(id), len=len(get_comments(id)))
-        return render_template("error.html", message="Peliä ei löydy")
+        return render_template("error.html", message="Game not found")
     if request.method == "POST":
         review_id = request.form["review_id"]
         csrf_token = request.form["csrf_token"]
@@ -68,4 +68,4 @@ def game_route(id):
         if delete_review(review_id):
             return render_template(
                 "game.html", game=get_game(id), reviews=get_reviews(id), len=len(get_comments(id)))
-        return render_template("error.html", message="Arvostelun poistaminen ei onnistunut")
+        return render_template("error.html", message="Deleting review failed")

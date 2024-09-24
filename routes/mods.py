@@ -10,9 +10,9 @@ from db_account import check_csrf
 def users_route():
     """Handles showing users and deleting users"""
     if "username" not in session:
-        return render_template("error.html", message="Kirjaudu ensin sisään")
+        return render_template("error.html", message="Log in first")
     if session["admin_rights"] == False:
-        return render_template("error.html", message="Sinulla ei ole oikeuksia tälle sivulle")
+        return render_template("error.html", message="You do not have permission to view this page")
     if request.method == "GET":
         return render_template("users.html", users=get_users())
     if request.method == "POST":
@@ -20,10 +20,10 @@ def users_route():
         csrf_token = request.form["csrf_token"]
         check_csrf(csrf_token)
         if username == session["username"]:
-            return render_template("error.html", message="Et voi poistaa itseäsi")
+            return render_template("error.html", message="You cannot delete yourself")
         if delete_user(username):
             return redirect("/users")
-        return render_template("error.html", message="Käyttäjän poistaminen ei onnistunut")
+        return render_template("error.html", message="Deleting user failed")
 
 @app.route("/comment/delete", methods=["POST"])
 def delete_comment_route():
@@ -34,4 +34,4 @@ def delete_comment_route():
     check_csrf(csrf_token)
     if delete_comment(comment_id):
         return redirect("/game/" + str(review_id) + "/comments")
-    return render_template("error.html", message="Kommentin poistaminen ei onnistunut")
+    return render_template("error.html", message="Deleting comment failed")
