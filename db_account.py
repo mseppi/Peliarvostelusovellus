@@ -31,6 +31,7 @@ def register(username, password):
     # hash_value = generate_password_hash(password)
     try:
         sql = text("INSERT INTO users (username, pword) VALUES (:username, :pword)")
+        # db.session.execute(sql, {"username":username, "pword":hash_value})
         db.session.execute(sql, {"username":username, "pword":password})
         sql2 = text("INSERT INTO profile (username) VALUES (:username)")
         db.session.execute(sql2, {"username":username})
