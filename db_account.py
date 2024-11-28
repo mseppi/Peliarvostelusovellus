@@ -4,7 +4,8 @@ Contains functions to handle user accounts in database
 from os import urandom
 from db import db
 from flask import session, abort
-# from werkzeug.security import check_password_hash, generate_password_hash
+import logging
+from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy import text
 
 def login(username, password):
@@ -21,7 +22,9 @@ def login(username, password):
             session["csrf_token"] = urandom(16).hex()
             session["admin_rights"] = user[2]
             return True
-    return False
+    else:
+        # logging.warning("User not found")
+        return False
 
 def register(username, password):
     """Register a new user"""
