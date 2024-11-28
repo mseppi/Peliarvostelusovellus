@@ -7,9 +7,11 @@ from sqlalchemy import text
 def add_game(title, genre, release_year):
     """Add a game to the database."""
     try:
+        #sql = text(
+        #    "INSERT INTO games (title, genre, release_year) VALUES (:title, :genre, :release_year)")
         sql = text(
-            "INSERT INTO games (title, genre, release_year) VALUES (:title, :genre, :release_year)")
-        db.session.execute(sql, {"title":title, "genre":genre, "release_year":release_year})
+            f"INSERT INTO games (title, genre, release_year) VALUES ('{title}', '{genre}', {release_year})")
+        db.session.execute(sql)
         db.session.commit()
         return True
     except:
